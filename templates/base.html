@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+
+      {% endblock %}
+    </title>
+  <style>
+      html {
+           background: #383838;
+      }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+  <div class="h-screen flex items-center justify-center">
+  <div class="flex flex-col p-16 rounded-md bg-white border">
+  <h1 class="text-6xl">AI-API Web Test</h1>
+    <form method="post" action="{% url 'index' %}" class="my-2 space-y-4">
+        {% csrf_token %}
+        {% if no_value %}
+            <ul class="list-disc ml-4">
+            <li class="text-red-700 ">Input is required</li>
+            </ul>
+        {% endif %}
+        <div class="flex space-x-2 items-center">
+            <label for="{{ form.formInput.id_for_label }}">Input:</label><input value="{{ your_input_value }}" type="text" name="{{ form.formInput.name }}" id="{{ form.formInput.id_for_label }}" class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <button type="submit" class="p-2 border rounded-md ease-in-out duration-300 w-full hover:bg-black hover:text-white">Submit</button>
+    </form>
+
+
+    {% if submitted_value %}
+            <p class="w-full text-2xl font-bold text-center mt-4">Your input is: {{ submitted_value }}</p>
+    {% endif %}
+  </div>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  </body>
+</html>
